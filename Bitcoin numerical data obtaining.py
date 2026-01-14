@@ -1,0 +1,38 @@
+import yfinance as yf
+import pandas as pd
+
+# Parameters
+TICKER = "BTC-USD"
+START_DATE = "2011-01-01"
+OUTPUT_FILE = "btc_usd_daily_price_yahoo.csv"
+
+# Download data
+
+btc = yf.download(
+    TICKER,
+    start=START_DATE,
+    progress=False
+)
+
+# Keep relevant columns
+btc = btc[[
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Volume"
+]]
+
+# Reset index (Date column)
+btc = btc.reset_index()
+
+# Save to CSV
+btc.to_csv(
+    OUTPUT_FILE,
+    index=False,
+    encoding="utf-8-sig"
+)
+
+print("BTC daily price data downloaded successfully.")
+print(f"Date range: {btc['Date'].min()} → {btc['Date'].max()}")
+print(f"Saved as: {OUTPUT_FILE}")

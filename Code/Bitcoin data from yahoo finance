@@ -36,3 +36,4 @@ btc.to_csv(
 print("BTC daily price data downloaded successfully.")
 print(f"Date range: {btc['Date'].min()} → {btc['Date'].max()}")
 print(f"Saved as: {OUTPUT_FILE}")
+
